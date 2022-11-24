@@ -10,17 +10,9 @@ export const getTestCommand = async (
         return command;
     }
 
-    const isNpmStyle = command.startsWith('npm') || command.startsWith('pnpm');
-
-    const hasDoubleHyhen = command.includes(' -- ');
-
     // building new command
     const newCommandBuilder: (string | boolean)[] = [
-        command,
-        // add two hypens if it is npm or pnpm package managers and two hyphens don't already exist
-        isNpmStyle && !hasDoubleHyhen && '--',
-        // output file
-        `--outputFile="${outputFile}"`,
+        command 
     ];
 
     return newCommandBuilder.filter(Boolean).join(' ');
